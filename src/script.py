@@ -31,9 +31,9 @@ x = df.to_numpy().tolist()
 # ACF and PACF plots
 plt.figure()
 plt.subplot(211)
-plot_acf(df, ax=plt.gca(), lags=150)
+plot_acf(df, ax=plt.gca(), lags=70)
 plt.subplot(212)
-plot_pacf(df, ax=plt.gca(), lags=10)
+plot_pacf(df, ax=plt.gca(), lags=70)
 plt.show()
 plt.close()
 
