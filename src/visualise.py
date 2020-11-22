@@ -5,10 +5,13 @@
 import pandas as pd 
 from matplotlib import pyplot as plt
 
-pd.read_csv("data/TN.csv")
+df = pd.read_csv("../data/Tamil Nadu/TN.csv", header=0, index_col=0, squeeze=True)
 plt.style.use("seaborn")
 
+df.boxplot(column="Wind Speed",by='Hour')
 
+# plt.plot(days, speeds,linestyle='solid')
+# plt.xlabel("Day of the month")
+# plt.ylabel("Avg Windspeed value")
 
-plt.tight_layout()
 plt.show()
