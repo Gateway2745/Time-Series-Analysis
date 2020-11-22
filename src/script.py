@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error as mse
 from statsmodels.tsa.arima_model import ARIMA as arima
 from statsmodels.tsa.stattools import adfuller, kpss
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -27,6 +28,15 @@ df = df['Wind Speed']
 # print(df.head())
 x = df.to_numpy().tolist()
 
+# ACF and PACF plots
+plt.figure()
+plt.subplot(211)
+plot_acf(df, ax=plt.gca(), lags=150)
+plt.subplot(212)
+plot_pacf(df, ax=plt.gca(), lags=10)
+plt.show()
+plt.close()
+
 # check if data is stationary
 print("AD Fuller Test")
 result = adfuller(x)
@@ -47,7 +57,7 @@ for k, v in result[3].items():
 # separate out validation set
 train_size = int(len(x)*0.8)
 train, val = x[:train_size], x[train_size:]
-# print(len(train), len(val))
+print(len(train), len(val))
 history = train
 preds = list()
 
@@ -68,3 +78,4 @@ plt.plot(val, color='blue', label='actual')
 plt.plot(preds, color='red', label='prediction')
 plt.legend(loc="upper left")
 plt.show()
+plt.close()
