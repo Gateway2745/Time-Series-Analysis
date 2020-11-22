@@ -5,9 +5,12 @@
 import pandas as pd 
 from matplotlib import pyplot as plt
 
-df = pd.read_csv("../data/Tamil Nadu/TN.csv", header=0, index_col=0, squeeze=True)
+df = pd.read_csv("../data/Tamil Nadu/TN.csv")
 plt.style.use("seaborn")
 
+print(df.head)
+df = df.loc[(df['Year'] == 2000)]
+# print(df.head)
 df.boxplot(column="Wind Speed",by='Hour')
 
 # plt.plot(days, speeds,linestyle='solid')
