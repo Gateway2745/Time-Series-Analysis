@@ -24,6 +24,8 @@ ma_order = int(params.ma_order)
 
 # load dataframe
 df = pd.read_csv(params.filepath)
+filepath = 'TN.csv'
+df = pd.read_csv(filepath)
 df = df['Wind Speed']
 # print(df.head())
 x = df.to_numpy().tolist()
