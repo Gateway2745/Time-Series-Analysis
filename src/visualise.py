@@ -32,7 +32,7 @@ from pandas.plotting import autocorrelation_plot
 # plt.show()
 #plt.show()
 
-def show_violinplot(path_to_csv):
+def show_violinplot(path_to_csv, state):
     series = pd.read_csv(path_to_csv, header=0, index_col=0, parse_dates={'Date': ['Month', 'Day','Year']}, squeeze=True)
     series = series['Wind Speed']
     groups = series.groupby(pd.Grouper(freq='A'))
@@ -42,10 +42,18 @@ def show_violinplot(path_to_csv):
     fig, ax = plt.subplots(figsize =(9, 7)) 
     figure = sns.violinplot(data=years, ax=ax)
     figure.plot()
-    plt.title('Violin plot grouped by Year')
+    plt.title('Violin plot of '+state+' grouped by Year')
     plt.xlabel('Year')
     plt.ylabel('Wind Speed')
-    plt.savefig('../plots/yearly/violinplot.png')
+    plt.savefig('../plots/yearly/'+state+'violinplot.png')
+    plt.show()
+
+def hourly_violinplot(path_to_csv):
+    df = pd.read_csv(path_to_csv, header=0, index_col=0)
+    df = df.groupby(['Hour']).mean()
+    fig, ax = plt.subplots(figsize =(9, 7)) 
+    figure = sns.violinplot(y=df['Wind Speed'], ax=ax)
+    figure.plot()
     plt.show()
 
 def get_autocorrelation(path_to_csv):
@@ -65,6 +73,7 @@ def get_heatmap(path_to_csv):
     plt.matshow(years, interpolation=None, aspect='auto')
     plt.show()
 
-show_violinplot("../data/Tamil Nadu/TN.csv")
+show_violinplot("../data/MP/MP.csv", 'Madhya Pradesh')
+#hourly_violinplot("../data/Tamil Nadu/2014_hourly.csv")
 #get_autocorrelation("../data/Tamil Nadu/2014.csv")
 #get_heatmap("../data/Tamil Nadu/2014.csv")
