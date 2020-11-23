@@ -42,6 +42,8 @@ def show_violinplot(path_to_csv):
     fig, ax = plt.subplots(figsize =(9, 7)) 
     figure = sns.violinplot(data=years, ax=ax)
     figure.plot()
+    plt.xlabel('Year')
+    plt.ylabel('Wind Speed')
     plt.savefig('../violinplot.png')
     plt.show()
 
@@ -51,5 +53,17 @@ def get_autocorrelation(path_to_csv):
     autocorrelation_plot(series)
     plt.show()
 
-#show_violinplot("../data/Tamil Nadu/TN.csv")
-get_autocorrelation("../data/Tamil Nadu/2014.csv")
+def get_heatmap(path_to_csv):
+    series = pd.read_csv(path_to_csv, header=0, index_col=0, parse_dates={'Date': ['Month', 'Day','Year']}, squeeze=True)
+    series = series['Wind Speed']
+    groups = series.groupby(pd.Grouper(freq='A'))
+    years = pd.DataFrame()
+    for name, group in groups:
+	    years[name.year] = group.values
+    years = years.T
+    plt.matshow(years, interpolation=None, aspect='auto')
+    plt.show()
+
+show_violinplot("../data/Tamil Nadu/TN.csv")
+#get_autocorrelation("../data/Tamil Nadu/2014.csv")
+#get_heatmap("../data/Tamil Nadu/2014.csv")
