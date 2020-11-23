@@ -12,13 +12,13 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 from pandas.plotting import autocorrelation_plot
 
-df = pd.read_csv("../data/Tamil Nadu/2014_hourly.csv", header=0, index_col=0)
-df = df.groupby(['Hour']).mean()
-plt.style.use("seaborn")
+# df = pd.read_csv("../data/Tamil Nadu/2014_hourly.csv", header=0, index_col=0)
+# df = df.groupby(['Hour']).mean()
+# plt.style.use("seaborn")
 
 # df = df.loc[(df['Year'] == 2014) & (df['Month'] >=8) & (df["Month"] <= 10)]
 
-df.plot()
+#df.plot()
 # df.iloc[:50, :].plot.bar(x='Hour', y='Wind Speed')
 
 # plt.plot(df["Hour"], df["Wind Speed"], linestyle='solid')
@@ -28,8 +28,8 @@ df.plot()
 # plt.xlabel("Hour")
 # plt.ylabel("Windspeed value")
 
-plt.title("Tamil Nadu (2014) for August, September, October")
-plt.show()
+# plt.title("Tamil Nadu (2014) for August, September, October")
+# plt.show()
 #plt.show()
 
 def show_violinplot(path_to_csv):
@@ -42,9 +42,10 @@ def show_violinplot(path_to_csv):
     fig, ax = plt.subplots(figsize =(9, 7)) 
     figure = sns.violinplot(data=years, ax=ax)
     figure.plot()
+    plt.title('Violin plot grouped by Year')
     plt.xlabel('Year')
     plt.ylabel('Wind Speed')
-    plt.savefig('../violinplot.png')
+    plt.savefig('../plots/yearly/violinplot.png')
     plt.show()
 
 def get_autocorrelation(path_to_csv):
