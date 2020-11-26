@@ -8,7 +8,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX as sarimax
 from statsmodels.tsa.stattools import adfuller, kpss
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
-#ARIMA squared error : RJ = 0.042 | AP = 0.02 | TN = 0.001 | MP = 0.057
+#ARIMA squared error 
 ##############################
 #load dataframe
 df = pd.read_csv('TN.csv')
